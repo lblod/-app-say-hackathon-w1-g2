@@ -1,15 +1,14 @@
 defmodule Dispatcher do
   use Matcher
   define_accept_types [
-    html: [ "text/html", "application/xhtml+html" ],
-    json: [ "application/json", "application/vnd.api+json" ]
+    html: ["text/html", "application/xhtml+html"],
+    json: ["application/json", "application/vnd.api+json"],
+    upload: ["multipart/form-data"],
+    sparql_json: ["application/sparql-results+json"],
+    any: [ "*/*" ],
   ]
 
-  @any %{}
-  @json %{ accept: %{ json: true } }
-  @html %{ accept: %{ html: true } }
-
-  define_layers [ :static, :services, :fall_back, :not_found ]
+  define_layers [ :api, :frontend, :not_found ]
 
   ###############################################################
   # frontend layer
