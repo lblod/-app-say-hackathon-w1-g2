@@ -1,0 +1,57 @@
+PREFIX oe: <https://id.erfgoed.net/vocab/ontology#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
+PREFIX person: <http://www.w3.org/ns/person#>
+PREFIX schema: <http://schema.org/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> {
+
+    <http://data.lblod.info/id/application-cases/bdf70135-d14f-4571-b0cd-937d132ed251> a oe:Dossier ;
+      mu:uuid "bdf70135-d14f-4571-b0cd-937d132ed251" ;
+      dct:dateSubmitted "2024-09-12T14:49:00"^^xsd:dateTime ;
+      dct:modified "2024-09-12T14:49:00"^^xsd:dateTime ;
+      adms:status "Ongoing" ;
+      oe:dos_handeltPrimairOver <http://data.lblod.info/id/designation-objects/34c6204f-a843-48b2-9641-5951284bd064> ;
+      oe:dos_werdOpgestartDoorPoststuk <http://data.lblod.info/id/persons/abc2a540-c6ca-4221-81c0-80e9f3ca59a9> .
+
+    <http://data.lblod.info/id/designation-objects/34c6204f-a843-48b2-9641-5951284bd064> a oe:Aanduidingsobject ;
+      mu:uuid "34c6204f-a843-48b2-9641-5951284bd064" ;
+      ext:cadaster-parcel <http://data.lblod.info/id/location-element-parcels/c27811fa-b524-4c9b-bfe8-d60f5a0b2b69> .
+
+
+    <http://data.lblod.info/id/location-element-parcels/c27811fa-b524-4c9b-bfe8-d60f5a0b2b69> a oe:LocatieElementPerceel ;
+      mu:uuid "c27811fa-b524-4c9b-bfe8-d60f5a0b2b69" ;
+      ext:cadaster-parcel-name "Cadaster parcel name 1" ;
+      ext:cadastralInformationDepartment "Cadaster information department 1" ;
+      ext:cadastralSection "Section 1" ;
+      ext:cadastralNumber "1" ;
+      locn:address <http://data.lblod.info/id/adressen/362d89a4-547d-4104-9fb6-e037e7740913> .
+
+    <http://data.lblod.info/id/adressen/362d89a4-547d-4104-9fb6-e037e7740913> a locn:Address ;
+        mu:uuid "362d89a4-547d-4104-9fb6-e037e7740913" ;
+        locn:adminUnitL2 "Oost-Vlaanderen"@nl ;
+        locn:fullAddress "Franz Courtensstraat 11, 9200 Dendermonde, België"@nl ;
+        locn:postCode "9200" ;
+        locn:thoroughfare "Franz Courtensstraat"@nl ;
+        adres:Adresvoorstelling.huisnummer "11" ;
+        adres:gemeentenaam "Dendermonde"@nl ;
+        adres:land "België"@nl .
+
+    <http://data.lblod.info/id/persons/abc2a540-c6ca-4221-81c0-80e9f3ca59a9> a person:Person ;
+      mu:uuid "abc2a540-c6ca-4221-81c0-80e9f3ca59a9" ;
+      foaf:givenName "Given name 1" ;
+      foaf:familyName "Family name 1" ;
+      schema:contactPoint <http://data.lblod.info/id/contact-punten/1c992f5dabc3400e9e22ca965fd91eef> .
+
+    <http://data.lblod.info/id/contact-punten/1c992f5dabc3400e9e22ca965fd91eef> a schema:ContactPoint ;
+      mu:uuid "1c992f5dabc3400e9e22ca965fd91eef" ;
+      schema:email "test@domain.com" ;
+      schema:telephone "tel:+32123456711" .
+  }
+}
+    
