@@ -256,15 +256,15 @@
         },
         "cadastral-information-department": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralInformationDepartment"
         },
         "section": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralSection"
         },
         "number": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralNumber"
         }
       },
       "relationships": {
