@@ -2,8 +2,6 @@ version: '3.4'
 
 services:
   identifier:
-    ports:
-      - "80:80"
     restart: no
   virtuoso:
     ports:
