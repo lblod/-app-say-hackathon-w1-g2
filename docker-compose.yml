@@ -65,6 +65,4 @@ services:
       MU_SPARQL_TIMEOUT: "300"
     volumes:
       - ./config/migrations:/data/migrations
-    labels:
-      - "logging=true"
     restart: always
