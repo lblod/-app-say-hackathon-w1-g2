@@ -11,6 +11,33 @@ defmodule Dispatcher do
   define_layers [ :api, :frontend, :not_found ]
 
   ###############################################################
+  # Backend layer
+  ###############################################################
+  match "/accounts", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, [], "http://resource/accounts/"
+  end
+
+  match "/accounts/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://accountdetail/accounts/"
+  end
+
+  match "/users/*path" do
+    Proxy.forward conn, path, "http://cache/users/"
+  end
+
+  match "/persons/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://cache/persons/"
+  end
+
+  match "/mock/sessions/*path", %{ accept: [:any], layer: :api} do
+    Proxy.forward conn, path, "http://mocklogin/sessions/"
+  end
+
+  match "/sessions/*path" do
+    Proxy.forward conn, path, "http://login/sessions/"
+  end
+
+  ###############################################################
   # frontend layer
   ###############################################################
 
