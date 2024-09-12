@@ -19,7 +19,7 @@ defmodule Dispatcher do
   ###############
   # LOGIN
   ###############
-  match "/sessions/*path", %{ accept: [:json], layer: :api} do
+  match "/sessions/*path" do
     Proxy.forward conn, path, "http://login/sessions/"
   end
 
@@ -44,7 +44,7 @@ defmodule Dispatcher do
   end
 
   match "/mock/sessions/*path", %{ accept: [:any], layer: :api} do
-    Proxy.forward conn, path, "http://mock-login/sessions/"
+    Proxy.forward conn, path, "http://mocklogin/sessions/"
   end
 
 

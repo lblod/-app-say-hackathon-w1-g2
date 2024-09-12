@@ -246,7 +246,6 @@
       },
       "new-resource-base": "http://data.lblod.info/id/persons/"
     },
-
     "location-element-parcels": {
       "class": "oe:LocatieElementPerceel",
       "attributes": {
