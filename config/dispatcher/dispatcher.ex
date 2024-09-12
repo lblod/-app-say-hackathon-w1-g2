@@ -13,29 +13,37 @@ defmodule Dispatcher do
   ###############################################################
   # Backend layer
   ###############################################################
-  match "/accounts", %{ accept: [:json], layer: :api} do
-    Proxy.forward conn, [], "http://resource/accounts/"
+  match "/administrative-units/*path", %{accept: [:json], layer: :api} do
+    Proxy.forward(conn, path, "http://cache/administrative-units/")
+  end
+  ###############
+  # LOGIN
+  ###############
+  match "/sessions/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://login/sessions/"
   end
 
-  match "/accounts/*path", %{ accept: [:json], layer: :api} do
-    Proxy.forward conn, path, "http://accountdetail/accounts/"
+  match "/accounts", %{accept: [:json], layer: :api} do
+    Proxy.forward(conn, [], "http://resource/accounts/")
   end
 
-  match "/users/*path" do
-    Proxy.forward conn, path, "http://cache/users/"
+  match "/accounts/*path", %{accept: [:json], layer: :api} do
+    Proxy.forward(conn, path, "http://accountdetail/accounts/")
   end
 
-  match "/persons/*path", %{ accept: [:json], layer: :api} do
-    Proxy.forward conn, path, "http://cache/persons/"
+  match "/groups/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://cache/groups/"
+  end
+
+  match "/sites/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://cache/sites/"
   end
 
   match "/mock/sessions/*path", %{ accept: [:any], layer: :api} do
-    Proxy.forward conn, path, "http://mocklogin/sessions/"
+    Proxy.forward conn, path, "http://mock-login/sessions/"
   end
 
-  match "/sessions/*path" do
-    Proxy.forward conn, path, "http://login/sessions/"
-  end
+
 
   ###############################################################
   # frontend layer
@@ -57,7 +65,14 @@ defmodule Dispatcher do
     Proxy.forward(conn, [], "http://frontend/index.html")
   end
 
-  match "/*_", %{ layer: :not_found } do
+  match "/groups/*path", %{accept: [:json], layer: :api} do
+    Proxy.forward(conn, path, "http://resource/groups/")
+  end
+
+  ###############################################################
+  # Not found
+  ###############################################################
+  match "/*_", %{accept: [:any], layer: :not_found} do
     send_resp( conn, 404, "Route not found.  See config/dispatcher.ex" )
   end
 end

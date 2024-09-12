@@ -5,6 +5,7 @@ services:
     image: semtech/mu-identifier:1.10.3
     environment:
       SESSION_COOKIE_SECURE: "on"
+      DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: '[{"variables":[],"name":"public"},{"variables":[],"name":"clean"}]'
     links:
       - dispatcher:dispatcher
     restart: always
@@ -15,7 +16,7 @@ services:
     volumes:
       - ./config/dispatcher:/config
     restart: always
-  database:
+  virtuoso:
     image: redpencil/virtuoso:1.2.0-rc.1
     environment:
       SPARQL_UPDATE: "true"
@@ -24,13 +25,46 @@ services:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
     restart: always
+  database:
+    image: semtech/mu-authorization:0.6.0-beta.5
+    environment:
+      MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql"
+    volumes:
+      - ./config/authorization:/config
+    restart: always
   resource:
     image: semtech/mu-cl-resources:1.23.0
     links:
-      - database:database
+      - virtuoso:database
     volumes:
       - ./config/resources:/config
     restart: always
   frontend:
     image: lblod/frontend-say-hackathon-w1-g2:latest # In real life, it would be a fixed version
+    restart: always
+  cache:
+    image: semtech/mu-cache:2.0.1
+    links:
+      - resource:backend
+    labels:
+      - "logging=true"
+    restart: always
+  accountdetail:
+    image: lblod/account-detail-service:0.1.0
+    labels:
+      - "logging=true"
+    environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/hackaton/accounts"
+    links:
+      - database:database
+  migrations:
+    image: semtech/mu-migrations-service:0.9.0
+    links:
+      - virtuoso:database
+    environment:
+      MU_SPARQL_TIMEOUT: "300"
+    volumes:
+      - ./config/migrations:/data/migrations
+    labels:
+      - "logging=true"
     restart: always

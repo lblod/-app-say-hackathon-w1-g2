@@ -1,7 +1,295 @@
 {
   "version": "0.1",
   "prefixes": {
+    "locn": "http://www.w3.org/ns/locn#",
+    "nfo": "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#",
+    "nie": "http://www.semanticdesktop.org/ontologies/2007/01/19/nie#",
+    "resource": "http://dbpedia.org/resource/",
+    "org": "http://www.w3.org/ns/org#",
+    "bestuurcode": "http://lblod.data.gift/vocabularies/organisatie/",
+    "schema": "http://schema.org/",
+    "regorg": "http://www.w3.org/ns/regorg#",
+    "person": "http://www.w3.org/ns/person#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "dbpedia": "http://dbpedia.org/ontology/",
+    "adms": "http://www.w3.org/ns/adms#",
+    "m8g": "http://data.europa.eu/m8g/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "organisatie": "https://data.vlaanderen.be/ns/organisatie#",
+    "persoon": "https://data.vlaanderen.be/ns/persoon#",
+    "adres": "https://data.vlaanderen.be/ns/adres#",
+    "generiek": "https://data.vlaanderen.be/ns/generiek#",
+    "mandaat": "http://data.vlaanderen.be/ns/mandaat#",
+    "besluit": "http://data.vlaanderen.be/ns/besluit#",
+    "lblodlg": "http://data.lblod.info/vocabularies/leidinggevenden/",
+    "lblodorg": "https://data.lblod.info/vocabularies/organisatie/",
+    "lblodgeneriek": "https://data.lblod.info/vocabularies/generiek/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "euvoc": "http://publications.europa.eu/ontology/euvoc#",
+    "ere": "http://data.lblod.info/vocabularies/erediensten/",
+    "ch": "http://data.lblod.info/vocabularies/contacthub/",
+    "code": "http://data.vlaanderen.be/id/concept/",
+    "ext": "http://mu.semte.ch/vocabularies/ext/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "nacebel": "http://data.gift/vocabularies/nace-bel/",
+    "dct": "http://purl.org/dc/terms/",
+    "vereniging": "https://data.vlaanderen.be/ns/FeitelijkeVerenigingen#",
+    "orga": "http://lblod.data.gift/vocabularies/organisatie/",
+    "ver": "http://data.lblod.info/vocabularies/FeitelijkeVerenigingen/",
+    "pav": "http://purl.org/pav/",
+    "fv": "https://data.vlaanderen.be/ns/FeitelijkeVerenigingen#",
+    "eli": "http://data.europa.eu/eli/ontology#"
   },
   "resources": {
+    "users": {
+      "name": "user",
+      "class": "foaf:Person",
+      "attributes": {
+        "first-name": {
+          "type": "string",
+          "predicate": "foaf:firstName"
+        },
+        "family-name": {
+          "type": "string",
+          "predicate": "foaf:familyName"
+        }
+      },
+      "relationships": {
+        "accounts": {
+          "predicate": "foaf:account",
+          "target": "account",
+          "cardinality": "many"
+        },
+        "groups": {
+          "predicate": "foaf:member",
+          "target": "group",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/gebruiker/"
+    },
+    "accounts": {
+      "name": "account",
+      "class": "foaf:OnlineAccount",
+      "attributes": {
+        "provider": {
+          "type": "string",
+          "predicate": "foaf:accountServiceHomepage"
+        },
+        "identifier": {
+          "type": "string",
+          "predicate": "dct:identifier"
+        }
+      },
+      "relationships": {
+        "user": {
+          "predicate": "foaf:account",
+          "target": "user",
+          "cardinality": "one",
+          "inverse": true
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/account/"
+    },
+    "groups": {
+      "name": "group",
+      "class": "besluit:Bestuurseenheid",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "skos:prefLabel"
+        }
+      },
+      "relationships": {},
+      "new-resource-base": "http://data.lblod.info/id/bestuurseenheden/"
+    },
+    "addresses": {
+      "name": "address",
+      "class": "locn:Address",
+      "attributes": {
+        "number": {
+          "type": "string",
+          "predicate": "adres:Adresvoorstelling.huisnummer"
+        },
+        "box-number": {
+          "type": "string",
+          "predicate": "adres:Adresvoorstelling.busnummer"
+        },
+        "street": {
+          "type": "string",
+          "predicate": "locn:thoroughfare"
+        },
+        "postcode": {
+          "type": "string",
+          "predicate": "locn:postCode"
+        },
+        "municipality": {
+          "type": "string",
+          "predicate": "adres:gemeentenaam"
+        },
+        "province": {
+          "type": "string",
+          "predicate": "locn:adminUnitL2"
+        },
+        "country": {
+          "type": "string",
+          "predicate": "adres:land"
+        },
+        "full-address": {
+          "type": "string",
+          "predicate": "locn:fullAddress"
+        },
+        "address-register-uri": {
+          "type": "url",
+          "predicate": "adres:verwijstNaar"
+        }
+      },
+      "relationships": {
+        "source": {
+          "predicate": "dct:source",
+          "target": "concept",
+          "cardinality": "one"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/adressen/"
+    },
+    "organizations": {
+      "name": "organization",
+      "class": "org:Organization",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "skos:prefLabel"
+        },
+        "alternative-name": {
+          "type": "string",
+          "predicate": "skos:altLabel"
+        },
+        "expected-end-date": {
+          "type": "date",
+          "predicate": "lblodgeneriek:geplandeEindDatum"
+        },
+        "last-updated": {
+          "type": "datetime",
+          "predicate": "pav:lastUpdateOn"
+        },
+        "purpose": {
+          "type": "string",
+          "predicate": "org:purpose"
+        }
+      },
+      "relationships": {
+        "identifiers": {
+          "predicate": "adms:identifier",
+          "target": "identifier",
+          "cardinality": "many"
+        },
+        "parent-organization": {
+          "predicate": "org:memberOf",
+          "target": "organization",
+          "cardinality": "one"
+        },
+        "organization-status": {
+          "predicate": "regorg:orgStatus",
+          "target": "organization-status-code",
+          "cardinality": "one"
+        },
+        "primary-site": {
+          "predicate": "org:hasPrimarySite",
+          "target": "site",
+          "cardinality": "one"
+        },
+        "sites": {
+          "predicate": "org:hasSite",
+          "target": "site",
+          "cardinality": "many"
+        },
+        "contact-points": {
+          "predicate": "schema:contactPoint",
+          "target": "contact-point",
+          "cardinality": "many"
+        },
+        "members": {
+          "predicate": "org:hasMembership",
+          "target": "membership",
+          "cardinality": "many"
+        },
+        "change-events": {
+          "predicate": "org:resultingOrganization",
+          "cardinality": "many",
+          "target": "change-event",
+          "inverse": true
+        },
+        "target-audience": {
+          "predicate": "ver:doelgroep",
+          "cardinality": "one",
+          "target": "target-audience"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/organisaties/"
+    },
+    "persons": {
+      "name": "person",
+      "class": "person:Person",
+      "attributes": {
+        "given-name": {
+          "type": "string",
+          "predicate": "foaf:givenName"
+        },
+        "family-name": {
+          "type": "string",
+          "predicate": "foaf:familyName"
+        }
+      },
+      "relationships": {
+        "site": {
+          "predicate": "org:basedAt",
+          "target": "site",
+          "cardinality": "one"
+        },
+        "contact-points": {
+          "predicate": "schema:contactPoint",
+          "target": "contact-point",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/personen/"
+    },
+    "administrative-units": {
+      "class": "besluit:Bestuurseenheid",
+      "super": [
+        "organizations"
+      ],
+      "relationships": {
+        "governing-bodies": {
+          "predicate": "besluit:bestuurt",
+          "target": "governing-bodies",
+          "cardinality": "many",
+          "inverse": true
+        },
+        "scope": {
+          "predicate": "besluit:werkingsgebied",
+          "target": "locations",
+          "cardinality": "one"
+        },
+        "involved-boards": {
+          "predicate": "ere:betrokkenBestuur",
+          "target": "local-involvements",
+          "cardinality": "many"
+        },
+        "located-within": {
+          "predicate": "geo:sfWithin",
+          "target": "locations",
+          "cardinality": "one"
+        },
+        "exact-match": {
+          "predicate": "skos:exactMatch",
+          "target": "concepts",
+          "cardinality": "one"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/bestuurseenheden/"
+    }
   }
 }
