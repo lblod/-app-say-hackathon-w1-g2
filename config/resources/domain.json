@@ -184,6 +184,10 @@
         "modified-on": {
           "type": "datetime",
           "predicate": "dct:modified"
+        },
+        "status": {
+          "type": "string",
+          "predicate": "adms:status"
         }
       },
       "relationships": {
