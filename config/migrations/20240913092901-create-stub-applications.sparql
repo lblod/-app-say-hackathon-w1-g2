@@ -9,7 +9,7 @@ PREFIX person: <http://www.w3.org/ns/person#>
 PREFIX schema: <http://schema.org/>
 
 INSERT DATA {
-  GRAPH <http://mu.semte.ch/graphs/organizations/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> {
+  GRAPH <http://mu.semte.ch/graphs/public> {
 
     <http://data.lblod.info/id/application-cases/da8f3bd3-e3d2-4200-9a55-f3cb9b460782> a oe:Dossier ;
       mu:uuid "da8f3bd3-e3d2-4200-9a55-f3cb9b460782" ;
