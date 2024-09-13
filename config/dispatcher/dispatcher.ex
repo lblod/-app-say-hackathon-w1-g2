@@ -14,8 +14,29 @@ defmodule Dispatcher do
   # Backend layer
   ###############################################################
   match "/administrative-units/*path", %{accept: [:json], layer: :api} do
-    Proxy.forward(conn, path, "http://cache/administrative-units/")
+    Proxy.forward(conn, path, "http://resource/administrative-units/")
   end
+
+  match "/application-cases/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://resource/application-cases/"
+  end
+
+  match "/designation-objects/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://resource/designation-objects/"
+  end
+
+  match "/location-element-parcels/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://resource/location-element-parcels/"
+  end
+
+  match "/addresses/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://resource/addresses/"
+  end
+
+  match "/contact-points/*path", %{ accept: [:json], layer: :api} do
+    Proxy.forward conn, path, "http://resource/contact-points/"
+  end
+
   ###############
   # LOGIN
   ###############

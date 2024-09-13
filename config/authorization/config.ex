@@ -24,6 +24,10 @@ defmodule Acl.UserGroups.Config do
     "http://www.w3.org/2004/02/skos/core#ConceptScheme",
     "http://publications.europa.eu/ontology/euvoc#Country",
     "http://www.w3.org/ns/prov#Location",
+    "http://www.w3.org/ns/locn#Address",
+    "https://id.erfgoed.net/vocab/ontology#Dossier",
+    "https://id.erfgoed.net/vocab/ontology#LocatieElementPerceel",
+    "https://id.erfgoed.net/vocab/ontology#Aanduidingsobject",
   ]
 
   @org_type []

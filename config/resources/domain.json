@@ -286,7 +286,7 @@
       },
       "new-resource-base": "http://data.lblod.info/id/designation-objects/"
     },
-    "application-case": {
+    "application-cases": {
       "class": "oe:Dossier",
       "attributes": {
         "submitted-on": {
