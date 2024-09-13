@@ -34,7 +34,70 @@
     "oe": "https://id.erfgoed.net/vocab/ontology#"
   },
   "resources": {
+    "users": {
+      "name": "user",
+      "class": "foaf:Person",
+      "attributes": {
+        "first-name": {
+          "type": "string",
+          "predicate": "foaf:firstName"
+        },
+        "family-name": {
+          "type": "string",
+          "predicate": "foaf:familyName"
+        }
+      },
+      "relationships": {
+        "accounts": {
+          "predicate": "foaf:account",
+          "target": "account",
+          "cardinality": "many"
+        },
+        "groups": {
+          "predicate": "foaf:member",
+          "target": "group",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/gebruiker/"
+    },
+    "accounts": {
+      "name": "account",
+      "class": "foaf:OnlineAccount",
+      "attributes": {
+        "provider": {
+          "type": "string",
+          "predicate": "foaf:accountServiceHomepage"
+        },
+        "identifier": {
+          "type": "string",
+          "predicate": "dct:identifier"
+        }
+      },
+      "relationships": {
+        "user": {
+          "predicate": "foaf:account",
+          "target": "user",
+          "cardinality": "one",
+          "inverse": true
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/account/"
+    },
+    "groups": {
+      "name": "group",
+      "class": "besluit:Bestuurseenheid",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "skos:prefLabel"
+        }
+      },
+      "relationships": {},
+      "new-resource-base": "http://data.lblod.info/id/bestuurseenheden/"
+    },
     "addresses": {
+      "name": "address",
       "class": "locn:Address",
       "attributes": {
         "number": {
@@ -75,6 +138,55 @@
         }
       },
       "new-resource-base": "http://data.lblod.info/id/adressen/"
+    },
+    "persons": {
+      "name": "person",
+      "class": "person:Person",
+      "attributes": {
+        "given-name": {
+          "type": "string",
+          "predicate": "foaf:givenName"
+        },
+        "family-name": {
+          "type": "string",
+          "predicate": "foaf:familyName"
+        }
+      },
+      "relationships": {
+        "contact-points": {
+          "predicate": "schema:contactPoint",
+          "target": "contact-point",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/personen/"
+    },
+    "organizations": {
+      "name": "organization",
+      "class": "org:Organization",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "skos:prefLabel"
+        },
+        "alternative-name": {
+          "type": "string",
+          "predicate": "skos:altLabel"
+        },
+        "expected-end-date": {
+          "type": "date",
+          "predicate": "lblodgeneriek:geplandeEindDatum"
+        },
+        "last-updated": {
+          "type": "datetime",
+          "predicate": "pav:lastUpdateOn"
+        },
+        "purpose": {
+          "type": "string",
+          "predicate": "org:purpose"
+        }
+      },
+      "new-resource-base": "http://data.lblod.info/id/organisaties/"
     },
     "contact-points": {
       "class": "schema:ContactPoint",
@@ -143,15 +255,15 @@
         },
         "cadastral-information-department": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralInformationDepartment"
         },
         "section": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralSection"
         },
         "number": {
           "type": "string",
-          "predicate": "schema:email"
+          "predicate": "ext:cadastralNumber"
         }
       },
       "relationships": {

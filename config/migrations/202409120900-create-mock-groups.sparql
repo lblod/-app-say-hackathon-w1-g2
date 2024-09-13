@@ -1,0 +1,13 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    <http://data.lblod.info/id/bestuurseenheden/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> a besluit:Bestuurseenheid ;
+       mu:uuid "974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4" ;
+       skos:prefLabel "Aalst" ;
+       dcterms:identifier "OVO000001" .
+  }
+}

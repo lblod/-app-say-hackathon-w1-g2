@@ -1,0 +1,43 @@
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX ext:<http://mu.semte.ch/vocabularies/ext/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> {
+  <http://data.lblod.info/id/persoon/2319a659-49db-40ed-8379-bf62530e63f3> a foaf:Person ;
+                mu:uuid "2319a659-49db-40ed-8379-bf62530e63f3" ;
+                foaf:firstName "James" ;
+                foaf:familyName "Ellison (Secretaris)" ;
+                foaf:member <http://data.lblod.info/id/bestuurseenheden/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> ;
+                foaf:account <http://data.lblod.info/id/account/9b5d1287-c93c-42ee-b067-310095ed4ba5> .
+            <http://data.lblod.info/id/account/9b5d1287-c93c-42ee-b067-310095ed4ba5> a foaf:OnlineAccount ;
+                mu:uuid "9b5d1287-c93c-42ee-b067-310095ed4ba5" ;
+                foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+                ext:sessionRole "Hackaton-Secretary".
+
+            <http://data.lblod.info/id/persoon/fed92a2c-6b80-4f09-a461-cf3e70cbed80> a foaf:Person ;
+                mu:uuid "fed92a2c-6b80-4f09-a461-cf3e70cbed80" ;
+                foaf:firstName "Patricia" ;
+                foaf:familyName "Boutot (Editeerder)" ;
+                foaf:member <http://data.lblod.info/id/bestuurseenheden/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> ;
+                foaf:account <http://data.lblod.info/id/account/893145eb-36ed-4357-8cca-e8de21d0ce66> .
+            <http://data.lblod.info/id/account/893145eb-36ed-4357-8cca-e8de21d0ce66> a foaf:OnlineAccount ;
+                mu:uuid "893145eb-36ed-4357-8cca-e8de21d0ce66" ;
+                foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+                ext:sessionRole "Hackaton-Editor".
+
+            <http://data.lblod.info/id/persoon/7ea925f6-b18f-4c50-9dd6-f1fb249b36a6> a foaf:Person ;
+                mu:uuid "7ea925f6-b18f-4c50-9dd6-f1fb249b36a6" ;
+                foaf:firstName "David" ;
+                foaf:familyName "Lauzier (Publicist)" ;
+                foaf:member <http://data.lblod.info/id/bestuurseenheden/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> ;
+                foaf:account <http://data.lblod.info/id/account/bf93bfa5-1567-40b6-864b-4bb39885a9a3> .
+            <http://data.lblod.info/id/account/bf93bfa5-1567-40b6-864b-4bb39885a9a3> a foaf:OnlineAccount ;
+                mu:uuid "bf93bfa5-1567-40b6-864b-4bb39885a9a3" ;
+                foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+                ext:sessionRole "Hackaton-Publicist".
+  }
+
+}
