@@ -1,0 +1,53 @@
+PREFIX oe: <https://id.erfgoed.net/vocab/ontology#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
+PREFIX person: <http://www.w3.org/ns/person#>
+PREFIX schema: <http://schema.org/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/974816591f269bb7d74aa1720922651529f3d3b2a787f5c60b73e5a0384950a4> {
+
+    <http://data.lblod.info/id/application-cases/da8f3bd3-e3d2-4200-9a55-f3cb9b460782> a oe:Dossier ;
+      mu:uuid "da8f3bd3-e3d2-4200-9a55-f3cb9b460782" ;
+      dct:dateSubmitted "2024-08-02T02:00:00"^^xsd:dateTime ;
+      dct:modified "2024-08-02T02:00:00"^^xsd:dateTime ;
+      adms:status "Ongoing" ;
+      oe:dos_handeltPrimairOver <http://data.lblod.info/id/designation-objects/4dee48e1-31ed-4bff-a2bd-adca0401e433> ;
+      oe:dos_werdOpgestartDoorPoststuk <http://data.lblod.info/id/persons/96eebbfd-9477-4a96-9743-92bb274c64de> .
+
+    <http://data.lblod.info/id/designation-objects/4dee48e1-31ed-4bff-a2bd-adca0401e433> a oe:Aanduidingsobject ;
+      mu:uuid "4dee48e1-31ed-4bff-a2bd-adca0401e433" ;
+      ext:cadaster-parcel <http://data.lblod.info/id/location-element-parcels/0e6ede5d-1fd1-441a-bb9a-1940b8268d8d> .
+
+    <http://data.lblod.info/id/location-element-parcels/0e6ede5d-1fd1-441a-bb9a-1940b8268d8d> a oe:LocatieElementPerceel ;
+      mu:uuid "0e6ede5d-1fd1-441a-bb9a-1940b8268d8d" ;
+      ext:cadaster-parcel-name "Villa Rommens" ;
+      locn:address <http://data.lblod.info/id/adressen/35c7efab-dc4c-44f0-8d77-fdd78ac24aa9> .
+
+    <http://data.lblod.info/id/adressen/35c7efab-dc4c-44f0-8d77-fdd78ac24aa9> a locn:Address ;
+        mu:uuid "35c7efab-dc4c-44f0-8d77-fdd78ac24aa9" ;
+        locn:adminUnitL2 "Antwerpen"@nl ;
+        locn:fullAddress "Gasthuisstraat 59, 2340 Beerse, België"@nl ;
+        locn:postCode "2340" ;
+        locn:thoroughfare "Gasthuisstraat"@nl ;
+        adres:Adresvoorstelling.huisnummer "59" ;
+        adres:gemeentenaam "Beerse"@nl ;
+        adres:land "België"@nl .
+
+    <http://data.lblod.info/id/persons/96eebbfd-9477-4a96-9743-92bb274c64de> a person:Person ;
+      mu:uuid "96eebbfd-9477-4a96-9743-92bb274c64de" ;
+      foaf:givenName "Anonymized" ;
+      foaf:familyName "Person" ;
+      schema:contactPoint <http://data.lblod.info/id/contact-punten/b5e0af95-0e0d-4723-8de5-2a83808802fa> .
+
+    <http://data.lblod.info/id/contact-punten/b5e0af95-0e0d-4723-8de5-2a83808802fa> a schema:ContactPoint ;
+      mu:uuid "b5e0af95-0e0d-4723-8de5-2a83808802fa" ;
+      schema:email "anonymized@email.com" ;
+      schema:telephone "tel:+32123456789" . 
+  }
+}
+    
